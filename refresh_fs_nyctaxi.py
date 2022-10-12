@@ -1,4 +1,9 @@
 # Databricks notebook source
+raw_data = spark.read.format("delta").load("/databricks-datasets/nyctaxi-with-zipcodes/subsampled")
+
+%run ./helper_fns
+%run ./feature_fns
+
 # Compute the pickup_features feature group.
 pickup_features_df = pickup_features_fn(
   df=raw_data,
@@ -9,7 +14,7 @@ pickup_features_df = pickup_features_fn(
 
 # Write the pickup features DataFrame to the feature store table
 fs.write_table(
-  name="feature_store_taxi_example.trip_pickup_features",
+  name="petes_fs_taxi_example.trip_pickup_features",
   df=pickup_features_df,
   mode="merge",
 )
@@ -24,7 +29,11 @@ dropoff_features_df = dropoff_features_fn(
 
 # Write the dropoff features DataFrame to the feature store table
 fs.write_table(
-  name="feature_store_taxi_example.trip_dropoff_features",
+  name="petes_fs_taxi_example.trip_dropoff_features",
   df=dropoff_features_df,
   mode="merge",
 )
+
+# COMMAND ----------
+
+
