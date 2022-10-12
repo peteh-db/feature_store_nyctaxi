@@ -250,7 +250,7 @@ pickup_features_df = pickup_features_fn(
 
 # Write the pickup features DataFrame to the feature store table
 fs.write_table(
-  name="feature_store_taxi_example.trip_pickup_features",
+  name="petes_fs_taxi_example.trip_pickup_features",
   df=pickup_features_df,
   mode="merge",
 )
@@ -265,7 +265,7 @@ dropoff_features_df = dropoff_features_fn(
 
 # Write the dropoff features DataFrame to the feature store table
 fs.write_table(
-  name="feature_store_taxi_example.trip_dropoff_features",
+  name="petes_fs_taxi_example.trip_dropoff_features",
   df=dropoff_features_df,
   mode="merge",
 )
@@ -299,7 +299,7 @@ fs.write_table(
 # MAGIC %sql
 # MAGIC SELECT SUM(count_trips_window_30m_dropoff_zip) AS num_rides,
 # MAGIC        dropoff_is_weekend
-# MAGIC FROM   feature_store_taxi_example.trip_dropoff_features
+# MAGIC FROM   petes_fs_taxi_example.trip_dropoff_features
 # MAGIC WHERE  dropoff_is_weekend IS NOT NULL
 # MAGIC GROUP  BY dropoff_is_weekend;
 
@@ -409,8 +409,8 @@ taxi_data = rounded_taxi_data(raw_data)
 from databricks.feature_store import FeatureLookup
 import mlflow
 
-pickup_features_table = "feature_store_taxi_example.trip_pickup_features"
-dropoff_features_table = "feature_store_taxi_example.trip_dropoff_features"
+pickup_features_table = "petes_fs_taxi_example.trip_pickup_features"
+dropoff_features_table = "petes_fs_taxi_example.trip_dropoff_features"
 
 pickup_feature_lookups = [
    FeatureLookup( 
