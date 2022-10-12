@@ -172,6 +172,10 @@ display(pickup_features)
 
 # COMMAND ----------
 
+
+
+# COMMAND ----------
+
 # MAGIC %md Next, create an instance of the Feature Store client.
 
 # COMMAND ----------
