@@ -1,8 +1,17 @@
 # Databricks notebook source
+# MAGIC %run ./helper_fns
+
+# COMMAND ----------
+
+# MAGIC %run ./feature_fns
+
+# COMMAND ----------
+
 raw_data = spark.read.format("delta").load("/databricks-datasets/nyctaxi-with-zipcodes/subsampled")
 
-%run ./helper_fns
-%run ./feature_fns
+from datetime import datetime
+
+fs = feature_store.FeatureStoreClient()
 
 # Compute the pickup_features feature group.
 pickup_features_df = pickup_features_fn(
