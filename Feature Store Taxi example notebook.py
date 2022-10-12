@@ -168,7 +168,7 @@ display(pickup_features)
 # COMMAND ----------
 
 # MAGIC %sql 
-# MAGIC CREATE DATABASE IF NOT EXISTS feature_store_taxi_example;
+# MAGIC CREATE DATABASE IF NOT EXISTS petes_fs_taxi_example;
 
 # COMMAND ----------
 
@@ -191,14 +191,14 @@ fs = feature_store.FeatureStoreClient()
 spark.conf.set("spark.sql.shuffle.partitions", "5")
 
 fs.create_table(
-    name="feature_store_taxi_example.trip_pickup_features",
+    name="petes_fs_taxi_example.trip_pickup_features",
     primary_keys=["zip", "ts"],
     df=pickup_features,
     partition_columns="yyyy_mm",
     description="Taxi Fares. Pickup Features",
 )
 fs.create_table(
-    name="feature_store_taxi_example.trip_dropoff_features",
+    name="petes_fs_taxi_example.trip_dropoff_features",
     primary_keys=["zip", "ts"],
     df=dropoff_features,
     partition_columns="yyyy_mm",
